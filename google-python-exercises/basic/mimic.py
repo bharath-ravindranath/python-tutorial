@@ -68,15 +68,13 @@ def mimic_dict(filename):
 def print_mimic(mimic_dict, word):
   """Given mimic dict and start word, prints 200 random words."""
   # +++your code here+++
-  count = 0
   printString = ''
-  while count != 200:
+  for count in range(200):
     printString += word  + ' '
     listOfNextWords = mimic_dict.get(word)
     if not listOfNextWords:
       listOfNextWords = mimic_dict.get('')
     word = random.choice(listOfNextWords)
-    count += 1
   print(textwrap.fill(printString, 70))
   return
 
