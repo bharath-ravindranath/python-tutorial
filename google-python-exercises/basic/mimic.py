@@ -43,17 +43,41 @@ columns, so the output looks better.
 
 import random
 import sys
+import textwrap
 
 
 def mimic_dict(filename):
   """Returns mimic dict mapping each word to list of words which follow it."""
   # +++your code here+++
-  return
+  wordDictionary = {}
+  text = ''
+  with open(filename, 'r') as f:
+    text = f.read()
+
+  words = text.split()
+  previousWord = ''
+  for word in words:
+    if not previousWord in wordDictionary:
+      wordDictionary[previousWord] = [word]
+    else:
+      wordDictionary[previousWord].append(word)
+    previousWord = word
+  return wordDictionary
 
 
 def print_mimic(mimic_dict, word):
   """Given mimic dict and start word, prints 200 random words."""
   # +++your code here+++
+  count = 0
+  printString = ''
+  while count != 200:
+    printString += word  + ' '
+    listOfNextWords = mimic_dict.get(word)
+    if not listOfNextWords:
+      listOfNextWords = mimic_dict.get('')
+    word = random.choice(listOfNextWords)
+    count += 1
+  print(textwrap.fill(printString, 70))
   return
 
 
